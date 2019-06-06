@@ -5,7 +5,8 @@ class Ocean(object):
     # constructor - take a list of ship locations
     # ocean methods
     # - return an array of ShipLocations
-    # - strike(coordinate) - return hit, miss or sink
+    # - strike(coordinate) - return hit, miss or sink - check whether coordinate is occupied by a ship. 
+    #   If so, which ship? Call strike() method on the position of the ship occupying the coordinate and determine whether the hit sinks the ship
 
 class Ship(object):
   def __init__(self, length):

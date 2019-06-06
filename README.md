@@ -6,7 +6,7 @@ Battleship is a game played on a board with n x m holes placed in a grid pattern
 
 **Project Motivation**
 
-I'm trying to improve my fundamentals in data structures and in software engineering. I thought that this problem represented some fun challenges in both areas.
+I'm trying to improve my fundamentals in data structures and procedural decomposition. I thought that this problem represented some fun challenges in both areas.
 
 **Code Overview**
 
@@ -14,4 +14,10 @@ The game currently has 3 classes - Ocean, Ship and ShipLocation. Currently, it c
 
 **Next Steps**
 
-1. The constructors and methods currently assume good data inputs. E.g., the Ocean constructor assumes that the array of ShipLocations contains valid ShipLocations (non-clashing, )
+1. *Validation and Error handling.* The constructors and methods currently assume good data inputs. E.g., the Ocean constructor assumes that the array of ShipLocations contains valid ShipLocations (non-clashing, fully contained on board), and both strike() methods assume a valid Ocean coordinate and Ship position argument (respectively). 
+
+2. *Unit testing.* I'd like to use this project as a chance to practice writing unit tests.
+
+3. *Build game player.* Build a proper interactive 1-player game, where the player can input coordinates and receive feedback (miss, hit, sink, invalid coordinate?).
+
+4. *Randomize ShipLocations.* Currently, the ShipLocations are hard-coded. I would like to randomize these with each new Ocean instantiation. The difficulty here is in making sure the locations 1) keep the ships fully on the board and 2) do not clash with any other ships.

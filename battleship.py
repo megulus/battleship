@@ -22,27 +22,28 @@ class Ship(object):
   def strike(self, position):
     self.__positions[position] = True
     
-    # ship properties:
-    # - length
-    # * ship does NOT know its location
-    # ship methods:
-    # - is_sunk() - looks at each of its positions, returns true if all have been hit, false otherwise 
     # - strike(int position) - called by Ocean? In this scenario, player will hit coordinates in an ocean, and the ocean will 
     #   call this method (if coordinate occupied by a ship) on the position of ship in that ocean coordinate
 
 class ShipLocation(object):
   def __init__(self, ship, x, y, orientation):
-    pass
-    
-    # create an instance of ShipLocation with an instance of Ship at location (x, y) and orientation 'H' or 'V'
-    # a ship location can
-    # - return a location (start coordinate, orientation)
-    # - return a ship
+    self.ship = ship
+    self.x = x
+    self.y = y
+    self.orientation = orientation
 
 SHIP_LOCATIONS = [
-  # ShipLocation(Ship(3), 0, 0, 'H'),
-  # ...  
+  ShipLocation(Ship(3), 0, 0, 'H'),
+  ShipLocation(Ship(2), 3, 2, 'V')
 ]
 
+def main():
+  for location in SHIP_LOCATIONS:
+    ship = location.ship
+    print('ship length:', ship.length)
+    print('ship location', location.x, location.y)
+    print('ship orientation',  location.orientation)
+    print('is ship sunk?', ship.is_sunk())
+
 if __name__ == "__main__":
-    pass
+  main()

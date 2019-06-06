@@ -44,9 +44,6 @@ class Ship(object):
   def strike(self, position):
     self.__positions[position] = True
     
-    # - strike(int position) - called by Ocean? In this scenario, player will hit coordinates in an ocean, and the ocean will 
-    #   call this method (if coordinate occupied by a ship) on the position of ship in that ocean coordinate
-
 class ShipLocation(object):
   def __init__(self, ship, x, y, orientation):
     self.ship = ship

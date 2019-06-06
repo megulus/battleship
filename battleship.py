@@ -1,12 +1,34 @@
 class Ocean(object):
   def __init__(self, x, y, ship_locations):
-    pass
-    # an ocean - i.e. a game board - is a 2D coordinate plane of length x and height y
-    # constructor - take a list of ship locations
-    # ocean methods
-    # - return an array of ShipLocations
-    # - strike(coordinate) - return hit, miss or sink - check whether coordinate is occupied by a ship. 
-    #   If so, which ship? Call strike() method on the position of the ship occupying the coordinate and determine whether the hit sinks the ship
+    self.ocean = [[{ 'ship': None, 'position': None } for i in range(x)] for j in range(y)]
+    self.ship_locations = ship_locations
+    for location in ship_locations:
+      ship = location.ship
+      length = ship.length
+      orientation = location.orientation
+      x = location.x
+      y = location.y
+      self.ocean[x][y]['ship'] = ship
+      self.ocean[x][y]['position'] = 0
+      for i in range(1, length):
+        if orientation == 'H':
+          self.ocean[x + i][y]['ship'] = ship
+          self.ocean[x + i][y]['position'] = i
+        if orientation == 'V':
+          self.ocean[x][y + i]['ship'] = ship
+          self.ocean[x][y + i]['position'] = i
+
+  def strike(self, x, y):
+    coordinate = self.ocean[x][y]
+    if coordinate['ship']:
+      ship = coordinate['ship']
+      position = coordinate['position']
+      ship.strike(position)
+      if ship.is_sunk():
+        return 'SUNK!'
+      else:
+        return 'HIT!'
+    return 'MISS'
 
 class Ship(object):
   def __init__(self, length):
@@ -36,14 +58,13 @@ SHIP_LOCATIONS = [
   ShipLocation(Ship(3), 0, 0, 'H'),
   ShipLocation(Ship(2), 3, 2, 'V')
 ]
+OCEAN = Ocean(5, 5, SHIP_LOCATIONS)
 
 def main():
-  for location in SHIP_LOCATIONS:
-    ship = location.ship
-    print('ship length:', ship.length)
-    print('ship location', location.x, location.y)
-    print('ship orientation',  location.orientation)
-    print('is ship sunk?', ship.is_sunk())
+  print('OCEAN.strike(3, 0)', OCEAN.strike(3, 0))
+  print('OCEAN.strike(2, 0)', OCEAN.strike(2, 0))
+  print('OCEAN.strike(3, 3)', OCEAN.strike(3, 3))
+  print('OCEAN.strike(3, 2)', OCEAN.strike(3, 2))
 
 if __name__ == "__main__":
   main()
